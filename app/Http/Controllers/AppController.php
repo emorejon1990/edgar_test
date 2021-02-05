@@ -39,9 +39,7 @@ class AppController extends Controller
             return redirect()->intended('perfil');
         }
 
-        return redirect()->route('index')->withErrors([
-            'password' => 'Sus credenciales son incorrectas.',
-        ]);
+        return redirect()->route('index');
 
     }
 
@@ -53,7 +51,7 @@ class AppController extends Controller
     public function registro(Request $request)
 	{
         $this->validate(request(), [
-            'usuario' => 'required',
+            'usuario' => 'required|unique:users',
             'email' => 'required|email',
             'password' => 'required'
         ]);
@@ -91,6 +89,13 @@ class AppController extends Controller
 
     public function act_perfil(Request $request)
 	{
+        $request->validate([
+            'nombre' => 'nullable|max:120',
+            'apellidos' => 'nullable|max:120',
+            'direccion' => 'nullable|max:120',
+            'nat_fecha' => 'nullable|date',
+        ]);
+
         $user = Auth::user();
         $user->nombre = $request->get('nombre');
         $user->apellidos = $request->get('apellidos');

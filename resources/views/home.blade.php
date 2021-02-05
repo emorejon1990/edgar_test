@@ -19,8 +19,14 @@
             <div class="col-md-6"><input type="text" name="usuario" class="form-control" id="usuario" placeholder="Usuario"></div>
             <label for="password">Contraseña</label>
             <div class="col-md-1"><input type="password" name="password" class="form-control" id="password" placeholder="Contraseña"></div>
-            @if ($errors->has('password'))
-                <div class="validation">{{ $errors->first('password') }}</div>
+            @if ($errors->any())
+                <div class="validation">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
             @endif
           </div>
 

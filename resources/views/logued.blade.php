@@ -32,6 +32,15 @@
             <label for="nat_fecha">Fecha de Nacimiento</label>
             <div class="col-md-6"><input type="date" name="nat_fecha" class="form-control" id="nat_fecha" placeholder="Fecha de Nacimiento" value="@if($user->fecha_nacimiento){{ $user->fecha_nacimiento }}@endif"></div>
           </div>
+            @if ($errors->any())
+                <div class="validation">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
       </div>
       <div class="text-center"><button type="submit">Guardar</button></div>

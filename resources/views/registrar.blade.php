@@ -21,8 +21,14 @@
             <label for="email">Correo Electrónico</label>
             <div class="col-md-1"><input type="email" name="email" class="form-control" id="email" placeholder="Correo Electrónico"></div>
 
-            @if ($errors->has('password'))
-                <div class="validation">{{ $errors->first('password') }}</div>
+            @if ($errors->any())
+                <div class="validation">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
             @endif
           </div>
 

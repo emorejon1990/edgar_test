@@ -18,8 +18,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 Route::get('/', 'AppController@inicio')->name('index');
 
-Route::post('/login', 'AppController@entrar')->name('login');
-// Route::post('/login', 'AppController@entrar')->middleware('throttle:5,60')->name('login');
+Route::post('/login', 'AppController@entrar')->middleware('throttle:5,60')->name('login');
 
 Route::get('/registrar', 'AppController@registrar')->name('registrar');
 
@@ -34,7 +33,7 @@ Route::post('/recov', 'AppController@recuperarP')->name('recover');
 
 Route::group(['prefix' => 'perfil', 'middleware' => 'auth'], function() {
     Route::get('logout', 'AppController@logout')->name('logout');
-    Route::post('act_perfil', 'AppController@act_perfil')->name('act_perfil');
+    Route::post('act_perfil', 'AppController@act_perfil')->middleware('throttle:5,60')->name('act_perfil');
 
 });
 
